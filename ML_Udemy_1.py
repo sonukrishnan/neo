@@ -45,3 +45,36 @@ from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
+
+#Regression
+#==========
+
+# Fitting Simple Linear Regression to the Training Set
+from sklearn.linear_model import LinearRegression
+SLR = LinearRegression()
+SLR.fit(X_train,Y_Train)
+
+#Predicting the Test set results
+Y_Pred = SLR.predict(X_test)
+
+#Visualizing the Training Set Results
+plt.scatter(X_train, Y_Train, color = 'red')
+plt.plot(X_train, SLR.predict(X_train), color='blue')
+plt.title('Salary vs Experience (Training Set)')
+plt.xlabel('Years of Exp')
+plt.ylabel('Salary')
+plt.show()
+
+#Visualizing the Test Set Results
+plt.scatter(X_test, Y_Pred, color = 'red')
+plt.scatter(X_test, Y_Test, color = 'blue')
+
+plt.plot(X_train, SLR.predict(X_train), color='green')
+plt.title('Salary vs Experience (Test Set)')
+plt.xlabel('Years of Exp')
+plt.ylabel('Salary')
+plt.show()
+
+
+
+
