@@ -33,6 +33,9 @@ X = onehotencoder.fit_transform(X).toarray()
 labelencoder_Y = LabelEncoder()
 Y = labelencoder_Y.fit_transform(Y)
 
+# Avoiding Dummy Variable Trap
+X = X[:, 1:]
+
 
 #Splitting the dataset to Training and Test
 #-------------------------------------------
@@ -76,12 +79,52 @@ plt.title('Salary vs Experience (Test Set)')
 plt.xlabel('Years of Exp')
 plt.ylabel('Salary')
 plt.show()
+
+################
+# F Regression #
+################
+
+from sklearn.feature_selection import f_regression
+freg = f_regression(X_train, Y_Train)
+
 """
 
 #=========
 # MLR
 #=========
+"""
+# Fitting Simple Linear Regression to the Training Set
+from sklearn.linear_model import LinearRegression
+MLR = LinearRegression()
+MLR.fit(X_train,Y_train)
 
+#Predicting the Test set results
+Y_Pred = MLR.predict(X_test)
+
+#Building the optimal model using Backward Elimination
+import statsmodels.formula.api as sm
+X = np.append(arr = np.ones((50,1)).astype(int), values = X, axis = 1)
+X_opt = X[:, [0, 1, 2, 3, 4, 5]]
+MLR_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+MLR_OLS.summary() ## noticed that P value is high for x2 
+
+X_opt2 = X[:, [0, 1, 3, 4, 5]]
+MLR_OLS = sm.OLS(endog = Y, exog = X_opt2).fit()
+MLR_OLS.summary() ## noticed that P value is high for x1
+
+X_opt3 = X[:, [0, 3, 4, 5]]
+MLR_OLS = sm.OLS(endog = Y, exog = X_opt3).fit()
+MLR_OLS.summary() ## noticed that P value is high for x2 
+
+X_opt4 = X[:, [0, 3, 5]]
+MLR_OLS = sm.OLS(endog = Y, exog = X_opt4).fit()
+MLR_OLS.summary() ## noticed that P value is high for x2 
+
+X_opt5 = X[:, [0, 3]]
+MLR_OLS = sm.OLS(endog = Y, exog = X_opt5).fit()
+MLR_OLS.summary() 
+
+"""
 
 
 
