@@ -24,27 +24,33 @@ SLR = LinearRegression()
 SLR.fit(X,Y)
 
 from sklearn.preprocessing import PolynomialFeatures
-polynomialfeatures = PolynomialFeatures(degree=2)
+polynomialfeatures = PolynomialFeatures(degree=4)
 X_Poly = polynomialfeatures.fit_transform(X)
 
 PLR = LinearRegression()
 PLR.fit(X_Poly,Y)
 
 # Visualizing the Linear Regression
+"""
 plt.scatter(X, Y, color = 'red')
 plt.plot(X, SLR.predict(X), color = 'blue')
 plt.title('Simple Linear Regression')
 plt.xlabel('Position Level')
 plt.ylabel('Salary')
 plt.show()
+"""
 
 # Visualizing the Polynomial Linear Regression
+X_grid = np.arange(min(X), max(X), 0.1)
+X_grid = X_grid.reshape(len(X_grid),1)
 plt.scatter(X, Y, color = 'red')
-plt.plot(X, PLR.predict(polynomialfeatures.fit_transform(X)), color = 'green')
+plt.plot(X, PLR.predict(polynomialfeatures.fit_transform(X_grid)), color = 'green')
+plt.plot(X, PLR.predict(polynomialfeatures.fit_transform(X)), color = 'blue')
 plt.title('Polynominal Regression')
 plt.xlabel('Position Level')
 plt.ylabel('Salary')
 plt.show()
+
 
 
 
