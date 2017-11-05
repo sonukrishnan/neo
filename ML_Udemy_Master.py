@@ -126,5 +126,19 @@ MLR_OLS.summary()
 
 """
 
+#=======================
+# Polynomial Regression
+#=======================
+
+"""
+# Fitting Polynominal Regression
+from sklearn.preprocessing import PolynomialFeatures
+polynomialfeatures = PolynomialFeatures(degree=4)
+X_Poly = polynomialfeatures.fit_transform(X)
+polynomialfeatures.fit(X_Poly,Y)
+
+PLR = LinearRegression()
+PLR.fit(X_Poly,Y)
+"""
 
 
