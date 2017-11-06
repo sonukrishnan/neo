@@ -159,3 +159,35 @@ X1 = sc_X.transform(np.array([[6.5]]))
 sc_Y.inverse_transform(svrmodel.predict(X1))
 
 """
+
+
+#===============
+# Decision Tree
+#===============
+
+"""
+# Fitting Decision Tree Regression to the Training Set
+from sklearn.tree import DecisionTreeRegressor
+regressor = DecisionTreeRegressor(random_state=0)
+regressor.fit(X,Y)
+
+# Predicting Value
+Y_Pred = regressor.predict(6.5)
+
+# Visualizing the DTR Regression
+# Grid is created to show minor changes and its values so that the Tree is clearly called out
+X_grid = np.arange(min(X), max (X), 0.01)
+X_grid = X_grid.reshape((len(X_grid), 1))
+
+plt.scatter(X, Y, color = 'red')
+plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
+plt.title('Truth or Bluff (DTR)')
+plt.xlabel('Position Level')
+plt.ylabel('Salary')
+plt.show()
+"""
+
+
+#===============
+# Random Forest
+#===============
