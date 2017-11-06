@@ -34,7 +34,7 @@ Y = sc_Y.fit_transform(Y)
 """
 
 
-# Fitting Support Vector Regression to the Training Set
+# Fitting Decision Tree Regression to the Training Set
 from sklearn.tree import DecisionTreeRegressor
 regressor = DecisionTreeRegressor(random_state=0)
 regressor.fit(X,Y)
