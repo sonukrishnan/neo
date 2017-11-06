@@ -23,6 +23,7 @@ from sklearn.linear_model import LinearRegression
 SLR = LinearRegression()
 SLR.fit(X,Y)
 
+# Fitting Polynominal Regression
 from sklearn.preprocessing import PolynomialFeatures
 polynomialfeatures = PolynomialFeatures(degree=4)
 X_Poly = polynomialfeatures.fit_transform(X)
