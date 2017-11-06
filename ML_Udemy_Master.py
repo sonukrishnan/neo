@@ -141,4 +141,21 @@ PLR = LinearRegression()
 PLR.fit(X_Poly,Y)
 """
 
+#=================
+#  SVR Regression
+#=================
+"""
+# Fitting Support Vector Regression to the Training Set
+from sklearn.svm import SVR
+svrmodel = SVR(kernel='rbf')
+svrmodel.fit(X,Y)
 
+# Predicting SVR (below is only if scale is used)
+#Scale the value of 6.5 to Standard Scaler
+# Transform is expecting an array and hence we need np.array function
+X1 = sc_X.transform(np.array([[6.5]]))
+
+# Since we are now working on transformed data, we need to do inverse transform
+sc_Y.inverse_transform(svrmodel.predict(X1))
+
+"""

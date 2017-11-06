@@ -33,13 +33,18 @@ Y = sc_Y.fit_transform(Y)
 
 
 
-# Fitting Simple Linear Regression to the Training Set
+# Fitting Support Vector Regression to the Training Set
 from sklearn.svm import SVR
-svrmodel = SVR(kernel='poly')
+svrmodel = SVR(kernel='rbf')
 svrmodel.fit(X,Y)
 
 # Predicting Simple
-svrmodel.predict(6.5)
+#Scale the value of 6.5 to Standard Scaler
+# Transform is expecting an array and hence we need np.array function
+X1 = sc_X.transform(np.array([[6.5]]))
+
+# Since we are now working on transformed data, we need to do inverse transform
+sc_Y.inverse_transform(svrmodel.predict(X1))
 
 
 # Visualizing the SVR Regression
