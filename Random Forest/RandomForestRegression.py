@@ -34,42 +34,26 @@ Y = sc_Y.fit_transform(Y)
 """
 
 
-# Fitting Support Vector Regression to the Training Set
-from sklearn.tree import DecisionTreeRegressor
-regressor = DecisionTreeRegressor(random_state=0)
+# Fitting Random Forest Regression to the Training Set
+from sklearn.ensemble import RandomForestRegressor
+regressor = RandomForestRegressor(n_estimators=300, random_state=0)
 regressor.fit(X,Y)
 
 # Predicting Value
 Y_Pred = regressor.predict(6.5)
 
-# Visualizing the DTR Regression
+# Visualizing the RandomForest Regression
 # Grid is created to show minor changes and its values so that the Tree is clearly called out
 X_grid = np.arange(min(X), max (X), 0.01)
 X_grid = X_grid.reshape((len(X_grid), 1))
 
 plt.scatter(X, Y, color = 'red')
 plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
-plt.title('Truth or Bluff (DTR)')
-plt.xlabel('Position Level')
-plt.ylabel('Salary')
-plt.show()
-"""
-
-# Visualizing the Polynomial Linear Regression
-#X_grid = np.arange(min(X), max(X), 0.1) #..This is if you want to see continous line
-#X_grid = X_grid.reshape(len(X_grid),1) #.. reshape is for changing to array
-plt.scatter(X, Y, color = 'red')
-#plt.plot(X_grid, PLR.predict(polynomialfeatures.fit_transform(X_grid)), color = 'green')
-plt.plot(X, PLR.predict(polynomialfeatures.fit_transform(X)), color = 'blue')
-plt.title('Polynominal Regression')
+plt.title('Truth or Bluff (Random Forest)')
 plt.xlabel('Position Level')
 plt.ylabel('Salary')
 plt.show()
 
-
-# Predict PLR
-PLR.predict(polynomialfeatures.fit_transform(6.5))
-
-
-
+import statsmodels.formula.api as sm
+sm.OLS(endog=Y, exog=X).fit().summary()
 
