@@ -215,3 +215,23 @@ plt.ylabel('Salary')
 plt.show()
 """
 
+#=================
+# Classifiers
+#=================
+"""
+#Classification
+#-------------
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state=0)
+classifier.fit(X_Train, y_Train)
+
+#Prediction
+#----------
+y_Pred = classifier.predict(X_Test)
+
+# Confusion Matrix # To compare Predicted and Actual
+#-----------------
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_Test, y_Pred)
+
+"""
