@@ -235,3 +235,12 @@ from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_Test, y_Pred)
 
 """
+
+#=================
+#KNN Classification
+#=================
+"""
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors=5, metric='minkowski',p=2)
+classifier.fit(X_Train, y_Train)
+"""
