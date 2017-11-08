@@ -28,10 +28,10 @@ sc_X = StandardScaler()
 X_Train = sc_X.fit_transform(X_Train)
 X_Test = sc_X.transform(X_Test)
 
-#Classification
+#KNN Classification
 #-------------
-from sklearn.linear_model import LogisticRegression
-classifier = LogisticRegression(random_state=0)
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors=5, metric='minkowski',p=2)
 classifier.fit(X_Train, y_Train)
 
 #Prediction
