@@ -28,7 +28,7 @@ sc_X = StandardScaler()
 X_Train = sc_X.fit_transform(X_Train)
 X_Test = sc_X.transform(X_Test)
 
-#KNN Classification
+#SVM Classification
 #-------------
 from sklearn.svm import SVC
 classifier = SVC(random_state=0, kernel='linear')

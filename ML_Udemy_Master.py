@@ -244,3 +244,23 @@ from sklearn.neighbors import KNeighborsClassifier
 classifier = KNeighborsClassifier(n_neighbors=5, metric='minkowski',p=2)
 classifier.fit(X_Train, y_Train)
 """
+
+#=================
+#SVM Classification
+#=================
+"""
+rom sklearn.svm import SVC
+classifier = SVC(random_state=0, kernel='linear')
+classifier.fit(X_Train, y_Train)
+
+"""
+
+#=================
+#Kernel SVM Classification
+#=================
+"""
+rom sklearn.svm import SVC
+classifier = SVC(random_state=0, kernel='rbf')
+classifier.fit(X_Train, y_Train)
+
+"""
