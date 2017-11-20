@@ -16,7 +16,14 @@ X = dataset.iloc[:, [0,2,3,4,5,6,7,8,9,10,11]].values
 Y = dataset.iloc[:,1].values
                 
 dataset.head()
-                
+
+### Now let's prepare lists of numeric and categorical columns
+# Numeric Features
+numeric_features = ['Age', 'Fare']
+# Categorical Features
+ordinal_features = ['Pclass', 'SibSp', 'Parch']
+nominal_features = ['Sex', 'Embarked']
+
 # Check for Missing values
 #--------------------------
 dataset.isnull().sum()
@@ -27,6 +34,60 @@ dataset['target_name'] = dataset['Survived'].map({1:"Survived",0:"Not Surived"})
 
 sns.countplot(dataset.target_name)
 
+### Corralation matrix heatmap
+# Getting correlation matrix
+cor_matrix = dataset[numeric_features + ordinal_features].corr().round(2)
+# Plotting heatmap 
+fig = plt.figure(figsize=(12,12));
+sns.heatmap(cor_matrix, annot=True, center=0, cmap = sns.diverging_palette(250, 10, as_cmap=True), ax=plt.subplot(111));
+plt.show()
+
+### Plotting Numeric Features
+# Looping through and Plotting Numeric features
+for column in numeric_features:    
+    # Figure initiation
+    fig = plt.figure(figsize=(18,12))
+    
+    ### Distribution plot
+    sns.distplot(dataset[column].dropna(), ax=plt.subplot(221));
+    # X-axis Label
+    plt.xlabel(column, fontsize=14);
+    # Y-axis Label
+    plt.ylabel('Density', fontsize=14);
+    # Adding Super Title (One for a whole figure)
+    plt.suptitle('Plots for '+column, fontsize=18);
+    
+    ### Distribution per Survived / Not Survived Value
+    # Not Survived hist
+    sns.distplot(dataset.loc[dataset.Survived==0, column].dropna(),
+                 color='red', label='Not Survived', ax=plt.subplot(222));
+    # Survived hist
+    sns.distplot(dataset.loc[dataset.Survived==1, column].dropna(),
+                 color='blue', label='Survived', ax=plt.subplot(222));
+    # Adding Legend
+    plt.legend(loc='best')
+    # X-axis Label
+    plt.xlabel(column, fontsize=14);
+    # Y-axis Label
+    plt.ylabel('Density per Survived / Not Survived Value', fontsize=14);
+    
+    ### Average Column value per Survived / Not Survived Value
+    sns.barplot(x="target_name", y=column, data=dataset, ax=plt.subplot(223));
+    # X-axis Label
+    plt.xlabel('Survived or Not Survived?', fontsize=14);
+    # Y-axis Label
+    plt.ylabel('Average ' + column, fontsize=14);
+    
+    ### Boxplot of Column per Survived / Not Survived Value
+    sns.boxplot(x="target_name", y=column, data=dataset, ax=plt.subplot(224));
+    # X-axis Label
+    plt.xlabel('Survived or Not Survived?', fontsize=14);
+    # Y-axis Label
+    plt.ylabel(column, fontsize=14);
+    # Printing Chart
+    plt.show()
+    
+    
 #Taking care of Missing values
 #-----------------------------
 from sklearn.preprocessing import Imputer
