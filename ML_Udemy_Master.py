@@ -7,8 +7,15 @@ import pandas as pd
 # Import Dataset
 #---------------
 dataset = pd.read_csv('Data.csv')
+
+# Randomize the X inputs prior to split to Train and Test
+#========================================================
+np.random.shuffle(dataset)
+
 X = dataset.iloc[:, :-1].values       
 Y = dataset.iloc[:,3].values
+                
+
                 
 #Taking care of Missing values
 #-----------------------------
