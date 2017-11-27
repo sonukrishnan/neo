@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov  7 23:04:58 2017
-
-@author: sdn
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -31,7 +24,7 @@ X_test = sc_X.transform(X_test)
 #Decision Tree Classification
 #-------------
 from sklearn.tree import DecisionTreeClassifier
-classifier = DecisionTreeClassifier()
+classifier = DecisionTreeClassifier(criterion="gini", random_state= 0)
 classifier.fit(X_train, y_train)
 
 #Prediction
@@ -56,7 +49,7 @@ plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
                 c = ListedColormap(('red', 'green'))(i), label = j)
-plt.title('Naive Bayes (Training set)')
+plt.title('Decision Tree Classifier (Training set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
@@ -74,7 +67,7 @@ plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
                 c = ListedColormap(('red', 'green'))(i), label = j)
-plt.title('Naive Bayes (Test set)')
+plt.title('Decision Tree Classifier (Test set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
