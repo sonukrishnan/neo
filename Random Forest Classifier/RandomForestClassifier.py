@@ -21,10 +21,10 @@ sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
 
-#Decision Tree Classification
+#Random Forest Classification
 #-------------
-from sklearn.tree import DecisionTreeClassifier
-classifier = DecisionTreeClassifier(criterion="gini", random_state= 0)
+from sklearn.ensemble import RandomForestClassifier
+classifier = RandomForestClassifier(n_estimators=10, criterion="entropy", random_state= 0)
 classifier.fit(X_train, y_train)
 
 #Prediction
